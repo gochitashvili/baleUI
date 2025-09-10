@@ -19,6 +19,6 @@
   },
   "iconLibrary": "lucide",
   "registries": {
-    "@registry-starter": "https://registry-starter.vercel.app/r/{name}.json"
+    "@bale": "https://bale-ui.vercel.app/r/{name}.json"
   }
 }
