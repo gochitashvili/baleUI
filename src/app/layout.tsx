@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Montserrat } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
@@ -14,19 +14,14 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.svg", type: "image/svg+xml" }],
 };
 
-const GeistSans = Geist({
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  variable: "--font-sans",
 });
 
-const GeistMono = Geist_Mono({
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  variable: "--font-mono",
-});
-
-const MontserratSerif = Montserrat({
-  subsets: ["latin"],
-  variable: "--font-serif",
 });
 
 export default function RootLayout({
@@ -37,17 +32,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cn(
-        GeistSans.variable,
-        GeistMono.variable,
-        MontserratSerif.variable,
-        "bg-background text-foreground"
-      )}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
-      <meta
-        name="robots"
-        content="noindex, nofollow, noarchive, nosnippet, noimageindex"
-      />
       <body className="flex grow">
         {children}
         <Analytics />

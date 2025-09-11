@@ -47,54 +47,42 @@ export function ComponentCard({
   };
 
   return (
-    <section>
-      <Card id="starting-kit" className="border-foreground/25">
-        <CardHeader>
-          <div className="flex flex-col gap-4">
-            <CardTitle className="font-medium text-lg">Preview</CardTitle>
+    <section className="bg-card p-4 rounded border">
+      <div id="starting-kit" className="flex flex-col gap-4">
+        <div className="flex border-b pb-2 w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-16">
+          <p className="text-muted-foreground">{component.description}</p>
+          <div className="flex items-center gap-1 sm:ml-auto">
+            <TooltipProvider>
+              <Tooltip>
+                <TooltipContent className="font-mono">
+                  Copy npx command
+                </TooltipContent>
+                <TooltipTrigger asChild>
+                  <Button
+                    onClick={copyToClipboard}
+                    variant="outline"
+                    aria-label="Copy npx command to clipboard"
+                  >
+                    {copied ? (
+                      <Check className="size-4" />
+                    ) : (
+                      <Copy className="size-4" />
+                    )}
+                  </Button>
+                </TooltipTrigger>
+              </Tooltip>
+            </TooltipProvider>
 
-            <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between sm:gap-16">
-              <CardDescription>{component.description}</CardDescription>
-
-              <div className="flex items-center gap-1 sm:ml-auto">
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipContent className="font-mono">
-                      Copy npx command
-                    </TooltipContent>
-                    <TooltipTrigger asChild>
-                      <Button
-                        onClick={copyToClipboard}
-                        variant="outline"
-                        className="p-4"
-                        aria-label="Copy npx command to clipboard"
-                      >
-                        {copied ? (
-                          <Check className="size-4" />
-                        ) : (
-                          <Copy className="size-4" />
-                        )}
-                      </Button>
-                    </TooltipTrigger>
-                  </Tooltip>
-                </TooltipProvider>
-
-                <OpenInV0Button
-                  registryUrl={registryUrl}
-                  title={`${component.title} Kit`}
-                  prompt={prompt}
-                />
-              </div>
-            </div>
+            <OpenInV0Button
+              registryUrl={registryUrl}
+              title={`${component.title} Kit`}
+              prompt={prompt}
+            />
           </div>
-        </CardHeader>
+        </div>
 
-        <CardContent className="flex flex-col items-center justify-center gap-4 rounded-md px-6">
-          <div
-            className={
-              "h-[800px] w-full overflow-hidden rounded-md border border-border p-4"
-            }
-          >
+        <div className="flex flex-col items-center justify-center gap-4 rounded-md">
+          <div className={"h-[800px] w-full overflow-hidden"}>
             <iframe
               id="iframe"
               src={`/demo/${component.name}`}
@@ -102,8 +90,8 @@ export function ComponentCard({
               title="Page Preview"
             />
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </section>
   );
 }
